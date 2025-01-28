@@ -1,9 +1,11 @@
+import { useRouter } from "expo-router";
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Text, Image } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import * as Progress from "react-native-progress";
 
 const ProgressIndicatorScreen = () => {
   const [progress, setProgress] = useState(0);
+  const router = useRouter();
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -16,6 +18,13 @@ const ProgressIndicatorScreen = () => {
 
     return () => clearInterval(intervalId);
   }, []);
+
+  useEffect(() => {
+    if (progress >= 1) {
+      router.push("/NutritionResults");
+      setProgress(0);
+    }
+  }, [progress]);
 
   return (
     <View style={styles.container}>
