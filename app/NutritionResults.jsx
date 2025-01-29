@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
-import { Feather } from '@expo/vector-icons';
-import NutrientCard from '../components/NutrientCard';
+import { View, Image, StyleSheet, ScrollView } from 'react-native';
 import NutrientsSection from '../components/NutrientsSection';
+import mockNutrientsData from '../data/mockNutrientsData';
+import WeeklyMealNutrition from '../components/WeeklyMealNutrition';
 
 const NutritionResultsScreen = () => {
   return (
@@ -12,9 +12,15 @@ const NutritionResultsScreen = () => {
         style={styles.pizzaImage}
       />
       <View style={styles.nutrientsSection}>
-        <NutrientsSection header="Nutritional Overview" />
-        <NutrientsSection header="Macronutrients" value="Total: 60g" />
-        <NutrientsSection header="Micronutrients" value="Total: 30%" />
+        {mockNutrientsData.map((nutrientData, index) => (
+          <NutrientsSection
+            key={index}
+            header={nutrientData.header}
+            totalValue={nutrientData.totalValue}
+            nutrients={nutrientData.nutrients}
+          />
+        ))}
+        <WeeklyMealNutrition />
       </View>
     </ScrollView>
   );

@@ -3,9 +3,10 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Feather } from '@expo/vector-icons'; 
 
 const NutrientCard = ({nutritionType, nutritionValue}) => {
+
   return (
     <View style={styles.card}>
-      <Feather name="coffee" size={24} color="#8E64FF" style={styles.icon} /> 
+      <Feather name="coffee" size={32} color="#8E64FF" style={styles.icon} /> 
       <View style={styles.textContainer}>
         <Text style={styles.title}>{nutritionType}</Text>
         <Text style={styles.value}>{nutritionValue}</Text>
@@ -18,12 +19,11 @@ const styles = StyleSheet.create({
   card: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    borderRadius: 10,
-    width: 190,
-    height: 70,
-    backgroundColor: '#F2F2F2', 
+    paddingHorizontal: 12,
+    paddingVertical: 11,
+    borderRadius: 12,
+    height: 54,
+    backgroundColor: '#F6F6F6', 
   },
   icon: {
     marginRight: 10, 
@@ -32,10 +32,17 @@ const styles = StyleSheet.create({
     flex: 1, 
   },
   title: {
-    fontWeight: 'bold',
+    fontWeight: '400',
+    fontSize: 14,
+    lineHeight: 18,
+    color: '#565656'
   },
   value: {
-    fontSize: 16,
+    marginTop: 2,
+    fontWeight: '500',
+    fontSize: 14,
+    lineHeight: 18,
+    color: '#141414'
   },
 });
 
