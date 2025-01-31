@@ -1,20 +1,29 @@
 import { useRouter } from "expo-router";
-import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  ImageBackground,
+} from "react-native";
+import Button from "../components/Button";
+import ScanIcon from "../assets/images/scan.svg";
 
 export default function Index() {
   return (
-    <View style={styles.screenContainer}>
+    <ImageBackground
+      source={require("../assets/images/pizza.png")}
+      style={styles.screenContainer}
+    >
       <ScanFoodPrompt />
       <ScanOptions />
-    </View>
+    </ImageBackground>
   );
 }
 
 const ScanFoodPrompt = () => {
   return (
     <View style={styles.scanPromptContainer}>
-      <Image
-        source={{ uri: "https://reactjs.org/logo-og.png" }}
+      <ScanIcon
         style={styles.scanImage}
       />
       <View style={styles.innerContainer}>
@@ -29,21 +38,17 @@ const ScanFoodPrompt = () => {
 
 const ScanOptions = () => {
   const router = useRouter();
+  const handleFoodScan = () => {
+    router.push("/ProgressIndicator");
+  }
 
   return (
     <View style={styles.scanOptionsContainer}>
-      <TouchableOpacity
-        style={styles.scanOptionButton}
-        onPress={() => router.push("/ProgressIndicator")}
-      >
-        <Text>Camera</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.scanOptionButton}
-        onPress={() => router.push("/ProgressIndicator")}
-      >
-        <Text>Gallery</Text>
-      </TouchableOpacity>
+      <Button text="Camera" onPress={handleFoodScan} />
+      <Button
+        text="Gallery"
+        onPress={handleFoodScan}
+      />
     </View>
   );
 };
@@ -52,44 +57,42 @@ const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
     alignItems: "center",
+    backgroundColor: "#ffffff",
   },
   scanOptionsContainer: {
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-between",
+    width: "50%",
     marginVertical: 20,
   },
-  scanOptionButton: {
-    marginHorizontal: 10,
-    backgroundColor: "orange",
-    height: 30,
-    borderRadius: 10,
-    justifyContent: "center",
-    alignItems: "center",
-    width: 100,
-  },
   scanPromptContainer: {
-    backgroundColor: "rgba(255, 255, 255, 0.5)", // Semi-transparent white background
+    backgroundColor: "rgba(255, 255, 255, 0.2)",
     borderRadius: 10,
-    padding: 15,
-    marginVertical: 40,
+    padding: 10,
+    marginTop: 40,
     width: "80%",
     flexDirection: "row",
   },
   scanImage: {
-    width: 40,
-    height: 40,
+    width: 26,
+    height: 24,
   },
   innerContainer: {
-    marginLeft: 10,
+    paddingHorizontal: 12,
   },
   title: {
-    color: "black",
-    fontSize: 18,
-    fontWeight: "bold",
+    color: "#ffffff",
+    fontSize: 14,
+    lineHeight: 16,
+    fontWeight: "600",
     marginBottom: 5,
   },
   subtitle: {
-    fontSize: 14,
-    textAlign: "center",
+    color: "#ffffff",
+    fontSize: 10,
+    lineHeight: 14,
+    fontWeight: "400",
+    flexWrap: "wrap",
+    flexShrink: 1,
   },
 });

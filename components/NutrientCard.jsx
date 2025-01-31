@@ -1,12 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Feather } from '@expo/vector-icons'; 
+import { View, Text, StyleSheet, Image } from 'react-native';
 
-const NutrientCard = ({nutritionType, nutritionValue}) => {
+const NutrientCard = ({nutritionType, nutritionValue, Icon}) => {
 
   return (
     <View style={styles.card}>
-      <Feather name="coffee" size={32} color="#8E64FF" style={styles.icon} /> 
+      <Icon style={styles.icon} />
       <View style={styles.textContainer}>
         <Text style={styles.title}>{nutritionType}</Text>
         <Text style={styles.value}>{nutritionValue}</Text>
@@ -27,6 +26,8 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: 10, 
+    height: 32,
+    width: 32,
   },
   textContainer: {
     flex: 1, 

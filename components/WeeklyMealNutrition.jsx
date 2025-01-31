@@ -1,25 +1,21 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import BarChart from "./BarChart";
+import mockWeeklyMealNutritionData from "../data/mockWeeklyMealNutritionData";
 
 const WeeklyMealNutrition = () => {
-  const data = {
-    labels: ["S", "M", "T", "W", "T", "F", "S"],
-    datasets: [
-      {
-        data: [10, 20, 30, 40, 25, 35, 45],
-      },
-    ],
-  };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Weekly Meal Nutrition</Text>
+      <BarChart data={mockWeeklyMealNutritionData} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#fafafa',
     paddingVertical: 12,
     paddingHorizontal: 16,
     borderRadius: 12,
