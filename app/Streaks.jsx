@@ -8,11 +8,13 @@ const StreaksScreen = () => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.streakInfoContainer}>
-        <Streaks5 style={styles.streaks5} />
+        <View style={styles.streakIconContainer}>
+          <Streaks5 style={styles.streaks5} />
+        </View>
         <Text style={styles.onStreakText}>You're on a</Text>
         <Text style={styles.noOfDaysText}>5 days Streak!</Text>
         <Text style={styles.motivationalText}>Keep it up!</Text>
-        <Calendar currentStreak={4} />
+        <Calendar currentStreak={5} />
         <StreakBadge streak={5} />
       </View>
     </ScrollView>
@@ -28,6 +30,15 @@ const styles = StyleSheet.create({
   streakInfoContainer: {
     alignItems: "center",
     marginBottom: 24,
+  },
+  streakIconContainer: {
+    // iOS Shadow Properties
+    shadowColor: "rgba(255, 167, 38, 0.3)", // Shadow color
+    shadowOffset: { width: 0, height: 8 }, // Shadow offset (x, y)
+    shadowOpacity: 1, // Shadow opacity
+    shadowRadius: 20, // Shadow blur radius
+    // Android Shadow Property (elevation)
+    elevation: 8, // Android equivalent for shadow
   },
   streaks5: {
     height: 120,

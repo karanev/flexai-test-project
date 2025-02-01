@@ -1,6 +1,5 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { Ionicons } from "@expo/vector-icons"; // Or your preferred icon library
 import BronzeMilestone from "../assets/images/bronzeMilestone.svg";
 
 const StreakBadge = ({ streak }) => {

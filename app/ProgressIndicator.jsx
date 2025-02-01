@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   circularProgress: {
-    marginTop: 80,
+    marginTop: 110,
   },
   progressText: {
     fontWeight: "400",
