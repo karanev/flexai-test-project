@@ -1,6 +1,14 @@
 import { useRouter } from "expo-router";
 import React, { useState, useEffect, useRef } from "react";
-import { Animated, Easing, StyleSheet, View, Text, Image } from "react-native";
+import {
+  Animated,
+  Easing,
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  SafeAreaView,
+} from "react-native";
 import * as Progress from "react-native-progress";
 import NutrakLogo from "../assets/images/nutrak_logo.svg";
 
@@ -41,39 +49,44 @@ const ProgressIndicatorScreen = () => {
   }, [progress]);
 
   return (
-    <View style={styles.container}>
-      <NutrakLogo style={styles.logo} />
-      <View style={styles.circularProgress}>
-        <Animated.Image
-          style={{
-            transform: [
-              {
-                rotate: rotateValue.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: ["0deg", "360deg"],
-                }),
-              },
-            ],
-          }}
-          source={require("../assets/images/loader.png")}
+    <SafeAreaView style={styles.parentContainer}>
+      <View style={styles.container}>
+        <NutrakLogo style={styles.logo} />
+        <View style={styles.circularProgress}>
+          <Animated.Image
+            style={{
+              transform: [
+                {
+                  rotate: rotateValue.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: ["0deg", "360deg"],
+                  }),
+                },
+              ],
+            }}
+            source={require("../assets/images/loader.png")}
+          />
+        </View>
+        <Text style={styles.progressText}>Scanning in progress...</Text>
+        <Progress.Bar
+          progress={progress}
+          width={304}
+          color="#48BB78"
+          unfilledColor="#E9ECEF"
+          borderWidth={0}
+          borderRadius={5}
+          style={styles.progressBar}
         />
+        <Text style={styles.percentageText}>{Math.round(progress * 100)}%</Text>
       </View>
-      <Text style={styles.progressText}>Scanning in progress...</Text>
-      <Progress.Bar
-        progress={progress}
-        width={304}
-        color="#48BB78"
-        unfilledColor="#E9ECEF"
-        borderWidth={0}
-        borderRadius={5}
-        style={styles.progressBar}
-      />
-      <Text style={styles.percentageText}>{Math.round(progress * 100)}%</Text>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  parentContainer: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     alignItems: "center",

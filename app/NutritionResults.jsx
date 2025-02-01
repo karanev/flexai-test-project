@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, ScrollView, Text } from "react-native";
+import { View, StyleSheet, ScrollView, Text, SafeAreaView } from "react-native";
 import { useRouter } from "expo-router";
 import NutrientsSection from "../components/NutrientsSection";
 import mockNutrientsData from "../data/mockNutrientsData";
@@ -10,7 +10,7 @@ import FoodHeader from "../components/FoodHeader";
 const NutritionResultsScreen = () => {
   const router = useRouter();
   return (
-    <>
+    <SafeAreaView style={styles.parentContainer}>
       <ScrollView style={styles.container}>
         <FoodHeader />
         <View style={styles.nutrientsSection}>
@@ -35,11 +35,14 @@ const NutritionResultsScreen = () => {
           </View>
         </View>
       </ScrollView>
-    </>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  parentContainer: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     backgroundColor: "#fff",

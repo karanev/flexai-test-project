@@ -1,17 +1,25 @@
 import { useRouter } from "expo-router";
-import { Text, View, StyleSheet, ImageBackground } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  ImageBackground,
+  SafeAreaView,
+} from "react-native";
 import Button from "../components/Button";
 import ScanIcon from "../assets/images/scan.svg";
 
 export default function Index() {
   return (
-    <ImageBackground
-      source={require("../assets/images/pizza.png")}
-      style={styles.screenContainer}
-    >
-      <ScanFoodPrompt />
-      <ScanOptions />
-    </ImageBackground>
+    <SafeAreaView style={styles.parentContainer}>
+      <ImageBackground
+        source={require("../assets/images/pizza.png")}
+        style={styles.screenContainer}
+      >
+        <ScanFoodPrompt />
+        <ScanOptions />
+      </ImageBackground>
+    </SafeAreaView>
   );
 }
 
@@ -37,13 +45,24 @@ const ScanOptions = () => {
 
   return (
     <View style={styles.scanOptionsContainer}>
-      <Button text="Camera" onPress={handleFoodScan} style={styles.scanOptionButton} />
-      <Button text="Gallery" onPress={handleFoodScan} style={styles.scanOptionButton} />
+      <Button
+        text="Camera"
+        onPress={handleFoodScan}
+        style={styles.scanOptionButton}
+      />
+      <Button
+        text="Gallery"
+        onPress={handleFoodScan}
+        style={styles.scanOptionButton}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  parentContainer: {
+    flex: 1,
+  },
   screenContainer: {
     flex: 1,
     alignItems: "center",

@@ -1,11 +1,12 @@
 import React from "react";
-import { View, StyleSheet, ScrollView, Text } from "react-native";
+import { View, StyleSheet, ScrollView, Text, SafeAreaView } from "react-native";
 import Streaks5 from "../assets/images/streaks5.svg";
 import Calendar from "../components/Calendar";
 import StreakBadge from "../components/StreakBadge";
 
 const StreaksScreen = () => {
   return (
+    <SafeAreaView style={styles.parentContainer}>
     <ScrollView style={styles.container}>
       <View style={styles.streakInfoContainer}>
         <View style={styles.streakIconContainer}>
@@ -18,10 +19,14 @@ const StreaksScreen = () => {
         <StreakBadge streak={5} />
       </View>
     </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  parentContainer: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     backgroundColor: "#ffffff",
