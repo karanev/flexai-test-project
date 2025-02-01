@@ -1,57 +1,73 @@
 import { useRouter } from "expo-router";
-import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import React, { useState, useEffect, useRef } from "react";
+import { Animated, Easing, StyleSheet, View, Text, Image } from "react-native";
 import * as Progress from "react-native-progress";
+import NutrakLogo from "../assets/images/nutrak_logo.svg";
 
 const ProgressIndicatorScreen = () => {
   const [progress, setProgress] = useState(0);
-  const router = useRouter();
+  const rotateValue = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     const intervalId = setInterval(() => {
       if (progress < 1) {
-        setProgress((prevProgress) => prevProgress + 0.01); // Simulate progress increase
+        setProgress((prevProgress) => prevProgress + 0.01);
       } else {
         clearInterval(intervalId);
       }
-    }, 100); // Update progress every 100ms
+    }, 50);
 
     return () => clearInterval(intervalId);
   }, []);
 
   useEffect(() => {
+    // Rotate animation
+    Animated.loop(
+      Animated.timing(rotateValue, {
+        toValue: 1,
+        duration: 3000,
+        easing: Easing.linear,
+        useNativeDriver: true,
+      })
+    ).start();
+  }, [rotateValue]);
+
+  const router = useRouter();
+  useEffect(() => {
     if (progress >= 1) {
-      router.push("/NutritionResults");
+      router.replace("/NutritionResults");
       setProgress(0);
     }
   }, [progress]);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Progress Indicator</Text>
-
+      <NutrakLogo style={styles.logo} />
       <View style={styles.circularProgress}>
-        <Progress.Circle
-          size={100}
-          progress={progress}
-          borderWidth={0}
-          color="#48BB78"
-          unfilledColor="#E9ECEF"
-          thickness={5}
+        <Animated.Image
+          style={{
+            transform: [
+              {
+                rotate: rotateValue.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: ["0deg", "360deg"],
+                }),
+              },
+            ],
+          }}
+          source={require("../assets/images/loader.png")}
         />
       </View>
-
       <Text style={styles.progressText}>Scanning in progress...</Text>
-
       <Progress.Bar
         progress={progress}
-        width={200}
+        width={304}
         color="#48BB78"
         unfilledColor="#E9ECEF"
         borderWidth={0}
         borderRadius={5}
+        style={styles.progressBar}
       />
-
       <Text style={styles.percentageText}>{Math.round(progress * 100)}%</Text>
     </View>
   );
@@ -61,8 +77,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#F2F2F2",
+    backgroundColor: "#ffffff",
   },
   title: {
     fontSize: 20,
@@ -70,24 +85,33 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   circularProgress: {
-    marginBottom: 20,
+    marginTop: 80,
   },
   progressText: {
-    fontSize: 16,
-    marginBottom: 10,
+    fontWeight: "400",
+    fontSize: 14,
+    lineHeight: 18,
+    color: "#565656",
+    marginTop: 48,
+  },
+  progressBar: {
+    marginTop: 12,
   },
   percentageText: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginTop: 10,
+    fontSize: 20,
+    lineHeight: 24,
+    fontWeight: "600",
+    color: "#141414",
+    marginTop: 14,
   },
   bottomContainer: {
     position: "absolute",
     bottom: 20,
   },
   logo: {
-    width: 100,
-    height: 30,
+    width: 98,
+    height: 32,
+    marginTop: 80,
   },
 });
 

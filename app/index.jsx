@@ -1,10 +1,5 @@
 import { useRouter } from "expo-router";
-import {
-  Text,
-  View,
-  StyleSheet,
-  ImageBackground,
-} from "react-native";
+import { Text, View, StyleSheet, ImageBackground } from "react-native";
 import Button from "../components/Button";
 import ScanIcon from "../assets/images/scan.svg";
 
@@ -23,9 +18,7 @@ export default function Index() {
 const ScanFoodPrompt = () => {
   return (
     <View style={styles.scanPromptContainer}>
-      <ScanIcon
-        style={styles.scanImage}
-      />
+      <ScanIcon style={styles.scanImage} />
       <View style={styles.innerContainer}>
         <Text style={styles.title}>Scan Your Food</Text>
         <Text style={styles.subtitle}>
@@ -40,15 +33,12 @@ const ScanOptions = () => {
   const router = useRouter();
   const handleFoodScan = () => {
     router.push("/ProgressIndicator");
-  }
+  };
 
   return (
     <View style={styles.scanOptionsContainer}>
-      <Button text="Camera" onPress={handleFoodScan} />
-      <Button
-        text="Gallery"
-        onPress={handleFoodScan}
-      />
+      <Button text="Camera" onPress={handleFoodScan} style={styles.scanOptionButton} />
+      <Button text="Gallery" onPress={handleFoodScan} style={styles.scanOptionButton} />
     </View>
   );
 };
@@ -62,8 +52,11 @@ const styles = StyleSheet.create({
   scanOptionsContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    width: "50%",
+    width: "80%",
     marginVertical: 20,
+  },
+  scanOptionButton: {
+    width: "45%",
   },
   scanPromptContainer: {
     backgroundColor: "rgba(255, 255, 255, 0.2)",
